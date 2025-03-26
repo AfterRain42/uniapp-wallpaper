@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const utils_system = require("../../utils/system.js");
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   _easycom_uni_icons2();
@@ -10,20 +11,23 @@ if (!Math) {
 }
 const _sfc_main = {
   __name: "custom-nav-bar",
+  props: {
+    title: {
+      type: String,
+      default: "壁纸"
+    }
+  },
   setup(__props) {
-    let system = common_vendor.index.getSystemInfoSync();
-    let statusBarHeight = common_vendor.ref(system.statusBarHeight);
-    let { top, height } = common_vendor.index.getMenuButtonBoundingClientRect();
-    let titleBarHeight = common_vendor.ref((top - statusBarHeight.value) * 2 + height);
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.unref(statusBarHeight) + "px",
-        b: common_vendor.p({
+        a: common_vendor.unref(utils_system.getStatusBarHeight)() + "px",
+        b: common_vendor.t(__props.title),
+        c: common_vendor.p({
           type: "search",
           size: "20"
         }),
-        c: common_vendor.unref(titleBarHeight) + "px",
-        d: common_vendor.unref(statusBarHeight) + common_vendor.unref(titleBarHeight) + "px"
+        d: common_vendor.unref(utils_system.getTitleBarHeight)() + "px",
+        e: common_vendor.unref(utils_system.getStatusBarHeight)() + common_vendor.unref(utils_system.getTitleBarHeight)() + "px"
       };
     };
   }

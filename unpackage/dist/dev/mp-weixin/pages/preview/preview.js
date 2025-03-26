@@ -1,19 +1,20 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const common_assets = require("../../common/assets.js");
+const utils_system = require("../../utils/system.js");
 if (!Array) {
-  const _easycom_uni_dateformat2 = common_vendor.resolveComponent("uni-dateformat");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
+  const _easycom_uni_dateformat2 = common_vendor.resolveComponent("uni-dateformat");
   const _easycom_uni_rate2 = common_vendor.resolveComponent("uni-rate");
   const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
-  (_easycom_uni_dateformat2 + _easycom_uni_icons2 + _easycom_uni_rate2 + _easycom_uni_popup2)();
+  (_easycom_uni_icons2 + _easycom_uni_dateformat2 + _easycom_uni_rate2 + _easycom_uni_popup2)();
 }
-const _easycom_uni_dateformat = () => "../../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.js";
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+const _easycom_uni_dateformat = () => "../../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.js";
 const _easycom_uni_rate = () => "../../uni_modules/uni-rate/components/uni-rate/uni-rate.js";
 const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
 if (!Math) {
-  (_easycom_uni_dateformat + _easycom_uni_icons + _easycom_uni_rate + _easycom_uni_popup)();
+  (_easycom_uni_icons + _easycom_uni_dateformat + _easycom_uni_rate + _easycom_uni_popup)();
 }
 const _sfc_main = {
   __name: "preview",
@@ -39,7 +40,10 @@ const _sfc_main = {
     };
     const submitScore = () => {
       scorePop.value.close();
-      common_vendor.index.__f__("log", "at pages/preview/preview.vue:147", "已评分～");
+      common_vendor.index.__f__("log", "at pages/preview/preview.vue:149", "已评分～");
+    };
+    const goBack = () => {
+      common_vendor.index.navigateBack();
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -51,69 +55,75 @@ const _sfc_main = {
         d: maskState.value
       }, maskState.value ? {
         e: common_vendor.p({
+          type: "back",
+          size: "20"
+        }),
+        f: common_vendor.unref(utils_system.getStatusBarHeight)() + "px",
+        g: common_vendor.o(goBack),
+        h: common_vendor.p({
           date: /* @__PURE__ */ new Date(),
           format: "hh:mm"
         }),
-        f: common_vendor.p({
+        i: common_vendor.p({
           date: /* @__PURE__ */ new Date(),
           format: "MM月dd日"
         }),
-        g: common_vendor.o(clickInfo),
-        h: common_vendor.p({
+        j: common_vendor.o(clickInfo),
+        k: common_vendor.p({
           type: "info",
           size: "24",
           color: "#28b389"
         }),
-        i: common_vendor.o(clickScore),
-        j: common_vendor.p({
+        l: common_vendor.o(clickScore),
+        m: common_vendor.p({
           type: "star-filled",
           size: "24",
           color: "#28b389"
         }),
-        k: common_vendor.p({
+        n: common_vendor.p({
           type: "download-filled",
           size: "24",
           color: "#28b389"
         })
       } : {}, {
-        l: common_vendor.o(clickInfoClose),
-        m: common_vendor.p({
+        o: common_vendor.o(clickInfoClose),
+        p: common_vendor.p({
           type: "close",
           size: "18",
           color: "#999"
         }),
-        n: common_vendor.p({
+        q: common_vendor.p({
           readonly: true,
           value: "5",
           touchable: "false"
         }),
-        o: common_vendor.f(3, (item, k0, i0) => {
+        r: common_vendor.f(3, (item, k0, i0) => {
           return {};
         }),
-        p: common_vendor.sr(infoPop, "2dad6c07-5", {
+        s: common_vendor.sr(infoPop, "2dad6c07-6", {
           "k": "infoPop"
         }),
-        q: common_vendor.p({
+        t: common_vendor.p({
           type: "bottom"
         }),
-        r: common_vendor.o(clickScoreClose),
-        s: common_vendor.p({
+        v: common_vendor.o(clickScoreClose),
+        w: common_vendor.p({
           type: "close",
           size: "18",
           color: "#999"
         }),
-        t: common_vendor.o(($event) => userScore.value = $event),
-        v: common_vendor.p({
+        x: common_vendor.o(($event) => userScore.value = $event),
+        y: common_vendor.p({
           ["allow-half"]: true,
           modelValue: userScore.value
         }),
-        w: common_vendor.t(userScore.value),
-        x: !userScore.value,
-        y: common_vendor.o(submitScore),
-        z: common_vendor.sr(scorePop, "2dad6c07-8", {
+        z: common_vendor.t(userScore.value),
+        A: !userScore.value,
+        B: common_vendor.o(submitScore),
+        C: common_vendor.sr(scorePop, "2dad6c07-9", {
           "k": "scorePop"
         }),
-        A: common_vendor.p({
+        D: common_vendor.p({
           type: "center",
           ["is-mask-click"]: false
         })

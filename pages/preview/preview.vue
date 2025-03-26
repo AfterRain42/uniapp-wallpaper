@@ -7,8 +7,8 @@
 		</swiper>
 		
 		<view class="mask" v-if="maskState">
-			<view class="goBack">
-				
+			<view class="goBack" :style="{top:getStatusBarHeight()+'px'}" @click='goBack'>
+				<uni-icons type="back" size="20"></uni-icons>
 			</view>
 			<view class="count">
 				3/5
@@ -117,7 +117,9 @@
 
 <script setup>
 import { ref } from 'vue';
-    const userScore = ref(0)
+import {getStatusBarHeight} from '@/utils/system.js'
+    
+	const userScore = ref(0)
 
 	const maskState = ref(true)
 	const maskChange = ()=> {
@@ -146,6 +148,10 @@ import { ref } from 'vue';
 		scorePop.value.close();
 		console.log("已评分～")
 	}
+	//点击返回按钮
+	const goBack = ()=>{
+		uni.navigateBack()
+	}
 	
 </script>
 
@@ -164,7 +170,6 @@ import { ref } from 'vue';
 		}
 		.mask{
 		
-		
 			&>view{
 				left:0;
 				right: 0;
@@ -174,6 +179,18 @@ import { ref } from 'vue';
 				color: white;
 			}
 			.goBack{
+				width: 38px;
+				height: 38px;
+				background: rgba(0, 0, 0, 0.3);
+				left:38rpx;
+				margin-left: 0;
+				border-radius: 100px;
+				top:0;
+				color: #fff;
+				border:1px solid rgba(255, 255, 255, 0.3);
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				
 			}
 			.count{

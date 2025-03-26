@@ -1,9 +1,9 @@
 <template>
 	<view class="layout">
 		<view class="navbar">
-			<view class="statusBar" :style="{height:statusBarHeight + 'px' }"></view>
-			<view class="titleBar" :style="{height:titleBarHeight + 'px'}">
-				<view class="title">标题</view>
+			<view class="statusBar" :style="{height: getStatusBarHeight()+ 'px' }"></view>
+			<view class="titleBar" :style="{height:getTitleBarHeight() + 'px'}">
+				<view class="title">{{title}}</view>
 				<view class="search">
 					<uni-icons type="search" size="20" class="icon"></uni-icons>
 					<text class="text">搜索</text>
@@ -11,18 +11,22 @@
 			</view>
 		</view>
 		
-		<view class="fill" :style="{height:statusBarHeight + titleBarHeight + 'px'}">
+		<view class="fill" :style="{height:getStatusBarHeight() + getTitleBarHeight() + 'px'}">
 			
 		</view>
 	</view>
 </template>
 
 <script setup>
-	import {ref} from 'vue'
-	let system  = uni.getSystemInfoSync()
-	let statusBarHeight = ref(system.statusBarHeight)
-	let {top,height} = uni.getMenuButtonBoundingClientRect()
-	let titleBarHeight = ref((top - statusBarHeight.value) * 2 + height)
+import {getStatusBarHeight, getTitleBarHeight} from "@/utils/system.js";
+
+defineProps({
+	title:{
+		type:String,
+		default:"壁纸"
+	}
+});
+
 </script>
 
 <style lang="scss" scoped>
@@ -48,7 +52,7 @@
 			.title{
 				font-size: 22px;
 				color: black;
-				font-size: 700;
+				font-size: 900;
 			}
 			.search{
 				width: 220rpx;

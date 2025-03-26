@@ -1,16 +1,10 @@
 <template>
 	<view class="homeLayout pageBg">
-		<custom-nav-bar></custom-nav-bar>
+		<custom-nav-bar title="推荐"></custom-nav-bar>
 		<view class="banner">
 			<swiper circula indicator-dots indicator-color= rgba(255,255,255,0.5) indicator-active-color="#fff" autoplay="">
-				<swiper-item >
-					<image src="/common/images/banner1.jpg" mode="aspectFill"></image>
-				</swiper-item>
-				<swiper-item >
-					<image src="/common/images/banner2.jpg" mode="aspectFill"></image>
-				</swiper-item>
-				<swiper-item >
-					<image src="/common/images/banner3.jpg" mode="aspectFill"></image>
+				<swiper-item v-for="item in bannerList" :key="item._id">
+					<image :src="item.picurl" mode="aspectFill"></image>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -23,7 +17,9 @@
 			<view class="center">
 				<swiper vertical="" autoplay="" interval="1500" duration="300" circular="">
 					<swiper-item v-for="item in 4">
-						文字
+						<navigator url="/pages/notice/detail">
+							占位文字占位文字
+						</navigator>
 					</swiper-item>
 				</swiper>
 			</view>
@@ -47,7 +43,7 @@
 			</common-title>
 			<view class="content">
 				<scroll-view scroll-x="true" >
-					<view class="box" v-for="item in 8">
+					<view class="box" v-for="item in 8" @click="goPreview">
 						<image src="/common/images/preview2.jpg" mode="aspectFill"></image>
                     </view>
 				</scroll-view>
@@ -71,6 +67,41 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
+	const bannerList = ref([])
+	const randomList = ref([])
+	const getBanner = async ()=>{
+		let res = await uni.request({
+			url:"https://tea.qingnian8.com/api/bizhi/homeBanner",
+			header:{
+				"access-key":"648682"
+			}
+		})
+		if(res.data.errCode ===0){
+			bannerList.value = res.data.data
+		}
+	}
+	
+	const getDayRandom = async ()=>{
+		let res = await uni.request({
+			url:"https://tea.qingnian8.com/api/bizhi/randomWall",
+			header:{
+				"access-key":"648682"
+			}
+		})
+		if(res.data.errCode ===0){
+			randomList.value = res.data.data
+		}
+
+	}
+	const goPreview = ()=>{
+		uni.navigateTo({
+			url:"/pages/preview/preview"
+		})
+	}
+	getBanner()
+	getDayRandom()
 	
 </script>
 

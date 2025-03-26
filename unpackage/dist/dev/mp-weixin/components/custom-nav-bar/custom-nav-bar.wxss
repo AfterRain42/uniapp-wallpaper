@@ -39,7 +39,7 @@
 .layout .navbar .titleBar .title.data-v-412fc155 {
   font-size: 22px;
   color: black;
-  font-size: 700;
+  font-size: 900;
 }
 .layout .navbar .titleBar .search.data-v-412fc155 {
   width: 220rpx;
